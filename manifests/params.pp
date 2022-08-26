@@ -14,14 +14,14 @@ class oddjob::params {
   case $::osfamily {
     default: {}
     /(RedHat|redhat|amazon)/: {
-      $package        = 'oddjob'
-      $package_config = 'oddjob-mkhomedir'
-      $service        = 'oddjobd'
+      $package           = 'oddjob'
+      $package_mkhomedir = 'oddjob-mkhomedir'
+      $service           = 'oddjobd'
     }
     /(debian|ubuntu)/: {
-      $package        = undef
-      $package_config = undef
-      $service        = undef
+      $package           = undef
+      $package_mkhomedir = undef
+      $service           = undef
     }
   }
 
