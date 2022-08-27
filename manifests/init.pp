@@ -23,14 +23,6 @@
 #   * 'x.y.z' - Specific version
 #   * latest  - Latest available
 #
-# [*dependency_class*]
-#   Type: string, default: undef
-#   Name of a custom class to autoload to manage module's dependencies
-#
-# [*my_class*]
-#   Type: string, default: undef
-#   Name of a custom class to autoload to manage module's customizations
-#
 # [*noops*]
 #   Type: boolean, default: undef
 #   Set noop metaparameter to true for all the resources managed by the module.
@@ -44,8 +36,6 @@ class oddjob (
   $service_ensure    = 'running',
   $service_enable    = true,
   $version           = $::oddjob::params::version,
-  $dependency_class  = $::oddjob::params::dependency_class,
-  $my_class          = $::oddjob::params::my_class,
   $noops             = undef,
 ) inherits oddjob::params {
 
@@ -66,10 +56,6 @@ class oddjob (
     $file_ensure    = absent
   }
 
-  ### Extra classes
-  if $dependency_class { include $dependency_class }
-  if $my_class         { include $my_class         }
-
   package { 'oddjob':
     ensure => $package_ensure,
     name   => $package,
@@ -88,7 +74,6 @@ class oddjob (
     name    => $service,
     require => [
       Package['oddjob', 'oddjob-mkhomedir'],
-      Service['messagebus'],
     ],
   }
 

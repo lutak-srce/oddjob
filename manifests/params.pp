@@ -7,9 +7,6 @@ class oddjob::params {
   $ensure           = 'present'
   $version          = undef
 
-  $dependency_class = '::oddjob::dependencies'
-  $my_class         = undef
-
   # install package depending on major version
   case $::osfamily {
     default: {}
