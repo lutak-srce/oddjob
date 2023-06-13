@@ -39,11 +39,6 @@ class oddjob (
   $noops             = undef,
 ) inherits oddjob::params {
 
-  ### Input parameters validation
-  validate_re($ensure, ['present','absent'], 'Valid values are: present, absent')
-  validate_string($package)
-  validate_string($version)
-
   ### Internal variables (that map class parameters)
   if $ensure == 'present' {
     $package_ensure = $version ? {
